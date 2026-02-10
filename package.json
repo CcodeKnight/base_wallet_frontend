@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run querydb\" \"npm run dev:all\"",
+    "dev": "concurrently \"npm run querydb\" \"npm run dev:all\" \"npm run run_back\"",
     "querydb": "node pages/api/queryDB.js",
     "dev:all": "next dev",
     "build": "next build",
     "start": "next start",
+    "run_back": "cd ../ && cd base_wallet_backend && npm run start",
     "lint": "next lint"
   },
   "dependencies": {
